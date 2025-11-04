@@ -73,7 +73,7 @@ const App = () => {
           {/* Footer */}
           <footer className="bg-gradient-to-t from-indigo-950 to-blue-950 py-10 text-center text-indigo-200/80">
             <p>
-              © {new Date().getFullYear()} Portfolio Futuristik • Dibangun dengan React, Tailwind, Framer Motion, dan
+              © {new Date().getFullYear()} Portfolio Interaktif • Dibangun dengan React, Tailwind, Framer Motion, dan
               Spline.
             </p>
           </footer>

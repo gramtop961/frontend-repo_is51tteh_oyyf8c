@@ -1,21 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Video, Brush, Code, Cpu, Sparkles } from 'lucide-react';
+import { Video, Brush, Code, Cpu } from 'lucide-react';
 
-const SkillPill = ({ icon: Icon, title, items, hue }) => (
+const meters = [
+  { icon: Video, title: 'Video Editing', items: ['CapCut', 'KineMaster', 'Premiere', 'After Effects'], level: 92 },
+  { icon: Brush, title: 'Desain Grafis', items: ['Canva', 'Photoshop', 'EasyWorship'], level: 88 },
+  { icon: Code, title: 'Web Development', items: ['VS Code', 'Python', 'Google Colab', 'Tableau'], level: 84 },
+  { icon: Cpu, title: 'Systems / Projects', items: ['Sentiment App', 'Attendance System'], level: 80 },
+];
+
+const Gauge = ({ level }) => {
+  return (
+    <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: `${level}%` }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+      />
+    </div>
+  );
+};
+
+const SkillCard = ({ icon: Icon, title, items, level }) => (
   <motion.div
     whileHover={{ scale: 1.02 }}
     className="group relative rounded-2xl border border-white/10 bg-white/5 p-5 text-white shadow-xl backdrop-blur"
   >
-    <div className="mb-3 flex items-center gap-2">
-      <div
-        className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${hue} text-white shadow-lg`}
-      >
+    <div className="mb-3 flex items-center gap-3">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-lg transition-transform group-hover:rotate-3">
         <Icon className="h-5 w-5" />
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>
     </div>
-    <div className="flex flex-wrap gap-2">
+    <div className="mb-3 flex flex-wrap gap-2">
       {items.map((it) => (
         <span
           key={it}
@@ -26,6 +45,8 @@ const SkillPill = ({ icon: Icon, title, items, hue }) => (
         </span>
       ))}
     </div>
+    <Gauge level={level} />
+    <div className="mt-1 text-right text-xs text-indigo-200/80">{level}%</div>
     <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-fuchsia-500/10 via-transparent to-cyan-500/10" />
     </div>
@@ -44,56 +65,18 @@ const Skills = () => {
           className="mb-10 text-center"
         >
           <h2 className="bg-gradient-to-r from-purple-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-3xl font-extrabold text-transparent md:text-4xl">
-            Keahlian & Alat
+            Keahlian Dinamis
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-indigo-100/80">
-            Ikon interaktif dengan tooltip. Arahkan kursor untuk melihat detail setiap alat.
+            Ikon interaktif, bar grafis animasi, dan tooltip pada setiap alat.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <SkillPill
-            icon={Video}
-            title="Pengeditan Video"
-            hue="from-fuchsia-600 to-cyan-600"
-            items={["CapCut", "KineMaster", "Adobe Premiere", "After Effects"]}
-          />
-          <SkillPill
-            icon={Brush}
-            title="Desain Grafis"
-            hue="from-purple-600 to-blue-600"
-            items={["Canva", "Photoshop", "EasyWorship"]}
-          />
-          <SkillPill
-            icon={Code}
-            title="Web Development"
-            hue="from-indigo-600 to-cyan-600"
-            items={["Visual Studio Code", "Python", "Google Colab", "Tableau"]}
-          />
-          <SkillPill
-            icon={Cpu}
-            title="Projects & Systems"
-            hue="from-violet-600 to-sky-600"
-            items={["Sentiment Analysis Web App", "Attendance Tracking System"]}
-          />
+          {meters.map((m) => (
+            <SkillCard key={m.title} icon={m.icon} title={m.title} items={m.items} level={m.level} />
+          ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-        >
-          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            <Sparkles className="h-4 w-4 text-cyan-300" />
-            <span className="text-xs tracking-widest text-cyan-100">INTERAKTIF</span>
-          </div>
-          <p className="text-indigo-100/90">
-            Setiap elemen dirancang untuk memberi umpan balik visual yang halus: hover glow, transisi gradien, dan
-            animasi masuk saat bagian muncul di layar.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

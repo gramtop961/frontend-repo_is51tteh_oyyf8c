@@ -21,6 +21,7 @@ const TimelineItem = ({ year, title, desc }) => (
 const AboutContact = () => {
   return (
     <section id="about" className="relative w-full bg-gradient-to-b from-blue-950 to-indigo-950 py-20 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(147,51,234,0.08),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(34,211,238,0.08),transparent_40%)]" />
       <div className="mx-auto max-w-7xl px-6">
         {/* About Me */}
         <motion.div
@@ -34,8 +35,8 @@ const AboutContact = () => {
             Tentang Saya
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-indigo-100/80">
-            Lulusan Universitas Buddhi Dharma (GPA 3.64) dengan fokus tesis pada Sentiment Analysis Web Application. Saya
-            menggabungkan kreativitas dan logika untuk membangun pengalaman digital yang berdampak.
+            Lulusan Universitas Buddhi Dharma (GPA 3.64) dengan fokus tesis pada Sentiment Analysis Web Application.
+            Menciptakan pengalaman digital berdaya tarik melalui desain, video, dan kode.
           </p>
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
             <GraduationCap className="h-4 w-4 text-cyan-300" />
@@ -75,7 +76,11 @@ const AboutContact = () => {
               <Calendar className="h-5 w-5 text-cyan-300" />
               <h3 className="text-lg font-semibold text-white">Kontak</h3>
             </div>
-            <form
+            <motion.form
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
               onSubmit={(e) => {
                 e.preventDefault();
                 const form = e.currentTarget;
@@ -92,7 +97,7 @@ const AboutContact = () => {
                 <input
                   name="name"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-colors placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15"
+                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-all placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.12)]"
                   placeholder="Nama Anda"
                 />
               </div>
@@ -102,7 +107,7 @@ const AboutContact = () => {
                   type="email"
                   name="email"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-colors placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15"
+                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-all placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.12)]"
                   placeholder="email@contoh.com"
                 />
               </div>
@@ -112,7 +117,7 @@ const AboutContact = () => {
                   name="message"
                   rows={4}
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-colors placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15"
+                  className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-white outline-none transition-all placeholder:text-indigo-200/60 focus:border-cyan-400 focus:bg-white/15 focus:shadow-[0_0_0_4px_rgba(34,211,238,0.12)]"
                   placeholder="Sampaikan kebutuhan atau pertanyaan Anda"
                 />
               </div>
@@ -125,36 +130,42 @@ const AboutContact = () => {
                 <Send className="h-4 w-4" /> Kirim
               </motion.button>
 
-              <div className="mt-4 flex items-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mt-4 flex items-center gap-3"
+              >
                 <a
                   href="https://www.linkedin.com/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-colors hover:bg-white/20"
+                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-all hover:translate-y-[-1px] hover:bg-white/20"
                 >
-                  <Linkedin className="h-4 w-4 text-cyan-300" />
+                  <Linkedin className="h-4 w-4 text-cyan-300 transition-transform group-hover:scale-110" />
                   <span className="text-sm">LinkedIn</span>
                 </a>
                 <a
                   href="https://github.com/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-colors hover:bg-white/20"
+                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-all hover:translate-y-[-1px] hover:bg-white/20"
                 >
-                  <Github className="h-4 w-4 text-cyan-300" />
+                  <Github className="h-4 w-4 text-cyan-300 transition-transform group-hover:scale-110" />
                   <span className="text-sm">GitHub</span>
                 </a>
                 <a
                   href="https://instagram.com/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-colors hover:bg-white/20"
+                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-white transition-all hover:translate-y-[-1px] hover:bg-white/20"
                 >
-                  <Instagram className="h-4 w-4 text-cyan-300" />
+                  <Instagram className="h-4 w-4 text-cyan-300 transition-transform group-hover:scale-110" />
                   <span className="text-sm">Instagram</span>
                 </a>
-              </div>
-            </form>
+              </motion.div>
+            </motion.form>
           </div>
         </div>
       </div>
